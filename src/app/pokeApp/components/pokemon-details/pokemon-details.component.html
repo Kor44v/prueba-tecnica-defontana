@@ -1,0 +1,38 @@
+<div
+  class="container-fluid d-flex justify-content-center align-items-center vh-100"
+>
+  <div
+    *ngIf="pokemonData"
+    class="card mb-3"
+    style="max-width: 540px; max-height: 200px; overflow: hidden"
+  >
+    <div class="row g-0">
+      <div class="col-md-4">
+        <img
+          [src]="pokemonData.sprites.front_default"
+          class="img-fluid rounded-start align-middle"
+          [alt]="pokemonData.name"
+        />
+      </div>
+      <div class="col-md-8">
+        <div class="card-body">
+          <h5 class="card-title">{{ pokemonData.name }}</h5>
+          <div style="max-height: 100px; overflow-y: auto">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Movimientos</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let move of pokemonData.moves; let i = index">
+                  <td class="text-nowrap">{{ move.move.name }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,30 @@
+<mat-table [dataSource]="dataSource" matSort>
+  <ng-container matColumnDef="name">
+    <mat-header-cell *matHeaderCellDef mat-sort-header>
+      Nombre
+    </mat-header-cell>
+    <mat-cell *matCellDef="let pokemon"> {{ pokemon.name }} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="height">
+    <mat-header-cell *matHeaderCellDef mat-sort-header> </mat-header-cell>
+    <mat-cell *matCellDef="let pokemon">
+      <button
+        class="btn btn-outline-primary"
+        (click)="searchPokemonDetails(this.pokemon.name)"
+      >
+        Detalles
+      </button>
+      <i class="fa-regular fa-star"></i>
+    </mat-cell>
+  </ng-container>
+
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+</mat-table>
+
+<mat-paginator
+  [pageSizeOptions]="[10, 25, 50]"
+  [pageSize]="30"
+  showFirstLastButtons
+></mat-paginator>
