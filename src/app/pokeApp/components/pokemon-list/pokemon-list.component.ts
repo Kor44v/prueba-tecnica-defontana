@@ -17,7 +17,7 @@ import { PokemonDataService } from '../../services/pokemon-data.service';
 export class PokemonListComponent implements OnInit {
   pokemons: Result[] = [];
   pokeDetail: Pokedex[] = [];
-  currentFavorite: string[] | null = null;
+  currentFavorite: string | null = null;
 
   displayedColumns: string[] = ['name', 'height'];
 
@@ -68,7 +68,7 @@ export class PokemonListComponent implements OnInit {
   // Método para agregar/quitar un Pokémon de favoritos
   toggleFavorite(pokemonName: string): void {
     if (this.isFavorite(pokemonName)) {
-      this.pokemonDataService.removeFromFavorites(pokemonName);
+      this.pokemonDataService.addToFavorites(null); // Elimina el favorito actual
     } else {
       this.pokemonDataService.addToFavorites(pokemonName);
     }
@@ -76,7 +76,6 @@ export class PokemonListComponent implements OnInit {
 
   // Método para verificar si un Pokémon está en favoritos
   isFavorite(pokemonName: string): boolean {
-    const favorites = this.pokemonDataService.getFavorites();
-    return favorites.includes(pokemonName);
+    return this.currentFavorite === pokemonName;
   }
 }

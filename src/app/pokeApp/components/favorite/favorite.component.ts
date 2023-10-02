@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { PokemonDataService } from '../../services/pokemon-data.service';
+import { PokeService } from '../../services/poke-service.service';
 
 @Component({
   selector: 'app-favorite',
@@ -7,14 +8,17 @@ import { PokemonDataService } from '../../services/pokemon-data.service';
   styleUrls: ['./favorite.component.css'],
 })
 export class FavoriteComponent implements OnInit {
-  currentFavorite: string[] | null = null;
-  constructor(private pokemonServiceData: PokemonDataService) {}
+  currentFavorite: string | null = null;
+  constructor(
+    private pokemonServiceData: PokemonDataService,
+    private pokeService: PokeService
+  ) {}
 
   ngOnInit(): void {
-    // Suscríbete al observable currentFavorite$
     this.pokemonServiceData.favorites$.subscribe((favorite) => {
       this.currentFavorite = favorite;
       console.log(this.currentFavorite, 'favorite');
     });
   }
+  dialog() {}
 }

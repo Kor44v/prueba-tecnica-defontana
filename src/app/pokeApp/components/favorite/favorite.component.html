@@ -1,6 +1,10 @@
-<div class="d-flex justify-content-between mb-5 p-2 h-50">
-  <div>header</div>
-  <div *ngFor="let i of currentFavorite">Pokemon Favorito{{ i }}</div>
-
-  <div></div>
+<div
+  *ngIf="currentFavorite"
+  (click)="dialog()"
+  class="d-flex justify-content-center mb-5 p-2 h-50 pointer-cursor"
+>
+  <div class="d-flex flex-column align-items-center">
+    <p class="mb-0">Pokemon Favorito</p>
+    <strong class=""> {{ currentFavorite }}</strong>
+  </div>
 </div>

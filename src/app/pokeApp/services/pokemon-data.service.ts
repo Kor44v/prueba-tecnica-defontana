@@ -11,8 +11,8 @@ export class PokemonDataService {
   private searchTermSubject = new BehaviorSubject<string>('');
   public searchTerm$ = this.searchTermSubject.asObservable();
 
-  private favorites: string[] = [];
-  private favoritesSubject = new BehaviorSubject<string[]>(this.favorites);
+  private favorites: string | null = null;
+  private favoritesSubject = new BehaviorSubject<string | null>(null);
   public favorites$ = this.favoritesSubject.asObservable();
 
   getPokemonData() {
@@ -33,22 +33,26 @@ export class PokemonDataService {
   setSearchTerm(searchTerm: string): void {
     this.searchTermSubject.next(searchTerm);
   }
-  addToFavorites(pokemonName: string): void {
-    if (!this.favorites.includes(pokemonName)) {
-      this.favorites.push(pokemonName);
-      this.favoritesSubject.next(this.favorites);
-    }
+  // addToFavorites(pokemonName: string): void {
+  //   if (!this.favorites.includes(pokemonName)) {
+  //     this.favorites.push(pokemonName);
+  //     this.favoritesSubject.next(this.favorites);
+  //   }
+  // }
+  addToFavorites(pokemonName: string | null): void {
+    this.favorites = pokemonName; // Actualiza el Pokémon favorito actual
+    this.favoritesSubject.next(pokemonName); // Emite el cambio a los suscriptores
   }
 
   // Método para quitar un Pokémon de favoritos
-  removeFromFavorites(pokemonName: string): void {
-    const index = this.favorites.indexOf(pokemonName);
-    if (index !== -1) {
-      this.favorites.splice(index, 1);
-      this.favoritesSubject.next(this.favorites);
-    }
-  }
-  getFavorites(): string[] {
-    return this.favorites;
+  // removeFromFavorites(pokemonName: string): void {
+  //   const index = this.favorites.indexOf(pokemonName);
+  //   if (index !== -1) {
+  //     this.favorites.splice(index, 1);
+  //     this.favoritesSubject.next(this.favorites);
+  //   }
+  // }
+  getFavorites(pokemonName: string): boolean {
+    return this.favorites === pokemonName;
   }
 }
