@@ -17,6 +17,7 @@ import { PokemonDataService } from '../../services/pokemon-data.service';
 export class PokemonListComponent implements OnInit {
   pokemons: Result[] = [];
   pokeDetail: Pokedex[] = [];
+  currentFavorite: string[] | null = null;
 
   displayedColumns: string[] = ['name', 'height'];
 
@@ -36,6 +37,9 @@ export class PokemonListComponent implements OnInit {
     this.pokemonDataService.searchTerm$.subscribe((searchTerm) => {
       this.searchPokemon(searchTerm);
     });
+    this.pokemonDataService.favorites$.subscribe((favorite) => {
+      this.currentFavorite = favorite;
+    });
   }
   searchPokemon(searchTerm: string): void {
     if (searchTerm.trim() === '') {
@@ -54,17 +58,25 @@ export class PokemonListComponent implements OnInit {
       });
     }
   }
-  // searchPokemon(searchTerm: string): void {
-  //   this.pokemonService.searchPokemon(searchTerm).subscribe((data) => {
-  //     this.dataSource = new MatTableDataSource<Result>(data);
-  //     this.dataSource.paginator = this.paginator;
-  //     this.dataSource.sort = this.sort;
-  //   });
-  // }
+
   searchPokemonDetails(pokemonName: string): void {
     this.pokemonService.searchPokemonDetail(pokemonName).subscribe((data) => {
       console.log(data);
       this.pokemonDataService.setPokemonData(data);
     });
+  }
+  // Método para agregar/quitar un Pokémon de favoritos
+  toggleFavorite(pokemonName: string): void {
+    if (this.isFavorite(pokemonName)) {
+      this.pokemonDataService.removeFromFavorites(pokemonName);
+    } else {
+      this.pokemonDataService.addToFavorites(pokemonName);
+    }
+  }
+
+  // Método para verificar si un Pokémon está en favoritos
+  isFavorite(pokemonName: string): boolean {
+    const favorites = this.pokemonDataService.getFavorites();
+    return favorites.includes(pokemonName);
   }
 }
