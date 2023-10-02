@@ -26,7 +26,6 @@ export class DetailsComponent {
           this.pokemonCountByLetter[firstLetter]++;
         }
       });
-      console.log(pokemonList);
     });
   }
 }

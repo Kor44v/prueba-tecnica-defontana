@@ -16,6 +16,7 @@ import { PokemonListComponent } from './pokeApp/components/pokemon-list/pokemon-
 import { PokemonDetailComponent } from './pokeApp/components/pokemon-details/pokemon-details.component';
 import { SearchBarComponent } from './pokeApp/components/search-bar/search-bar.component';
 import { DetailsComponent } from './pokeApp/components/details/details.component';
+import { FavoriteComponent } from './pokeApp/components/favorite/favorite.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { DetailsComponent } from './pokeApp/components/details/details.component
     PokemonDetailComponent,
     SearchBarComponent,
     DetailsComponent,
+    FavoriteComponent,
   ],
   imports: [
     BrowserModule,
