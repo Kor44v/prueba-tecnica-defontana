@@ -33,15 +33,39 @@ export class PokemonListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.searchPokemon();
-  }
-  searchPokemon(): void {
-    this.pokemonService.searchPokemon().subscribe((data) => {
-      this.dataSource = new MatTableDataSource<Result>(data.results);
-      this.dataSource.paginator = this.paginator;
-      this.dataSource.sort = this.sort;
+    // this.pokemonDataService.getSearchResults().subscribe((data) => {
+    //   this.dataSource = new MatTableDataSource<Result>(data);
+    //   this.dataSource.paginator = this.paginator;
+    //   this.dataSource.sort = this.sort;
+    // });
+    this.pokemonDataService.searchTerm$.subscribe((searchTerm) => {
+      this.searchPokemon(searchTerm);
     });
   }
+  searchPokemon(searchTerm: string): void {
+    if (searchTerm.trim() === '') {
+      // Si el término de búsqueda está vacío, muestra todos los Pokémon
+      this.pokemonService.searchPokemon().subscribe((data) => {
+        this.dataSource = new MatTableDataSource<Result>(data);
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
+      });
+    } else {
+      // Realiza la búsqueda de Pokémon utilizando el término de búsqueda (searchTerm)
+      this.pokemonService.searchPokemon(searchTerm).subscribe((data) => {
+        this.dataSource = new MatTableDataSource<Result>(data);
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
+      });
+    }
+  }
+  // searchPokemon(searchTerm: string): void {
+  //   this.pokemonService.searchPokemon(searchTerm).subscribe((data) => {
+  //     this.dataSource = new MatTableDataSource<Result>(data);
+  //     this.dataSource.paginator = this.paginator;
+  //     this.dataSource.sort = this.sort;
+  //   });
+  // }
   searchPokemonDetails(pokemonName: string): void {
     this.pokemonService.searchPokemonDetail(pokemonName).subscribe((data) => {
       console.log(data);

@@ -15,6 +15,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PokemonListComponent } from './pokeApp/components/pokemon-list/pokemon-list.component';
 import { PokemonDetailComponent } from './pokeApp/components/pokemon-details/pokemon-details.component';
 import { SearchBarComponent } from './pokeApp/components/search-bar/search-bar.component';
+import { DetailsComponent } from './pokeApp/components/details/details.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { SearchBarComponent } from './pokeApp/components/search-bar/search-bar.c
     PokemonListComponent,
     PokemonDetailComponent,
     SearchBarComponent,
+    DetailsComponent,
   ],
   imports: [
     BrowserModule,

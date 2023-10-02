@@ -6,6 +6,9 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class PokemonDataService {
   private _pokemonData = new BehaviorSubject<any>(null);
+  private _searchResults = new BehaviorSubject<any>(null);
+  private searchTermSubject = new BehaviorSubject<string>('');
+  public searchTerm$ = this.searchTermSubject.asObservable();
 
   getPokemonData() {
     return this._pokemonData.asObservable();
@@ -13,5 +16,16 @@ export class PokemonDataService {
 
   setPokemonData(data: any) {
     this._pokemonData.next(data);
+  }
+
+  getSearchResults() {
+    return this._searchResults.asObservable();
+  }
+
+  setSearchResults(data: any) {
+    this._searchResults.next(data);
+  }
+  setSearchTerm(searchTerm: string): void {
+    this.searchTermSubject.next(searchTerm);
   }
 }

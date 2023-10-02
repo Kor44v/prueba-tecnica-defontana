@@ -1,9 +1,16 @@
 <div class="input-group">
-  <input type="text" class="form-control" placeholder="Buscar Pokémon" />
-  <button class="btn btn-outline-secondary" type="button">
+  <input
+    type="text"
+    class="form-control"
+    placeholder="Buscar Pokémon"
+    [formControl]="searchControl"
+    (keydown.enter)="search()"
+  />
+  <button class="btn btn-outline-secondary" type="button" (click)="search()">
     <i class="fa fa-search"></i>
   </button>
 </div>
+
 <!-- <form>
   <mat-form-field>
     <input
