@@ -1,1 +1,17 @@
-<p>details works!</p>
+<div class="container">
+  <h2>Resumen de Pokémon por Letra</h2>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Letra</th>
+        <th>Cantidad de Pokémon</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let letter of alphabet">
+        <td>{{ letter }}</td>
+        <td>{{ pokemonCountByLetter[letter] || 0 }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

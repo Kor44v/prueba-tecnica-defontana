@@ -33,11 +33,6 @@ export class PokemonListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // this.pokemonDataService.getSearchResults().subscribe((data) => {
-    //   this.dataSource = new MatTableDataSource<Result>(data);
-    //   this.dataSource.paginator = this.paginator;
-    //   this.dataSource.sort = this.sort;
-    // });
     this.pokemonDataService.searchTerm$.subscribe((searchTerm) => {
       this.searchPokemon(searchTerm);
     });
